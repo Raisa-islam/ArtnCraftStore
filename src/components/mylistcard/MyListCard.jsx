@@ -1,0 +1,54 @@
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+
+const MyListCard = ({ item, onDelete }) => {
+    const {_id, imageUrl, itemName, subcategoryName, price, rating ,customization, status} = item;
+
+   
+    const deleteItem = () => {
+        onDelete(_id);
+        fetch(`http://localhost:5001/items/${_id}`,{
+            method: 'DELETE'
+        })
+        .then(res => res.json())
+        .then(data =>{
+            console.log(data);
+        })
+        console.log("item is deleted", _id);
+    }
+
+    const updateItem = () => {
+        console.log("clicked!!")
+    }
+    return (
+        <div className="card w-96 bg-base-100 shadow-xl">
+            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
+            <div className="card-body">
+                <h2 className="card-title">
+                    {itemName}
+                    <div className="badge badge-secondary">{status}</div>
+                </h2>
+                <p>{subcategoryName}</p>
+                <div className="card-actions justify-between">
+                   <Link to='/' ><button className='btn' onClick={updateItem}>Update</button></Link> 
+                    <button className='btn' onClick={() => document.getElementById('my_modal_5').showModal()}>Delete</button>
+                    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+                        <div className="modal-box">
+                            <h3 className="font-bold text-lg">Hello!</h3>
+                            <p className="py-4">Are you sure you want to delete this item? </p>
+                            <div className="modal-action">
+                                <form method="dialog">
+                                    {/* if there is a button in form, it will close the modal */}
+                                    <button className="btn" onClick={deleteItem}>Yes</button>
+                                    <button className="btn">No</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default MyListCard;

@@ -8,6 +8,7 @@ import AddCraftItem from '../pages/addItem/AddCraftItem';
 import PrivateRoutes from './PrivateRoutes';
 import AlCraftsList from '../pages/allCraftsList/AlCraftsList';
 import MyCraftList from '../pages/myCrafts/MyCraftList';
+import ViewDetails from '../layouts/details/ViewDetails';
 
 const router = createBrowserRouter([
   {
@@ -38,11 +39,18 @@ const router = createBrowserRouter([
       },
       {
         path:"/all-arts-and-crafts",
-        element:<AlCraftsList></AlCraftsList>
+        element:<AlCraftsList></AlCraftsList>,
+        loader: ()=> fetch('http://localhost:5001/items')
+      },
+      {
+        path:"/view-details/:id",
+        element:<PrivateRoutes><ViewDetails></ViewDetails></PrivateRoutes>,
+        loader: ({params}) => fetch(`http://localhost:5001/items/${params.id}`)
       },
       {
         path:"/my-art-and-craft-list",
-        element:<PrivateRoutes><MyCraftList></MyCraftList></PrivateRoutes> 
+        element:<PrivateRoutes><MyCraftList></MyCraftList></PrivateRoutes> ,
+        
       }
 
     ]
