@@ -4,7 +4,7 @@ import { useLoaderData } from 'react-router-dom';
 const ViewDetails = () => {
     const item = useLoaderData();
     console.log(item);
-    const { _id, imageUrl, itemName, shortDescription, subcategoryName, price, rating, customization, status, processing } = item;
+    const { _id, imageUrl, itemName, shortDescription, subcategoryName, price, rating, customization, status, processing, displayName } = item;
     return (
         <div className='container mx-auto mt-12 max-w-[80%] overflow-hidden mb-12 p-2'>
 
@@ -70,6 +70,7 @@ const ViewDetails = () => {
                                     <p>Stock Details : <span className='font-semibold'>{status}</span></p>
                                     <p>Item Customization :  <span className='font-semibold'> {customization}</span></p>
                                     <p>Processing Time : <span className='font-semibold'>{processing} days</span></p>
+                                    <p>This Item is Added By- <span className='font-semibold'>{displayName}</span></p>
                                 </div>
                             </div>
 

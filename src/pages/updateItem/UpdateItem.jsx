@@ -1,16 +1,51 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useLoaderData } from 'react-router-dom';
 import { AuthContext } from '../../providers/AuthProviders';
+import { toast } from 'react-toastify';
 
 const UpdateItem = () => {
+    
     const {user} = useContext(AuthContext);
     const item = useLoaderData();
     console.log(item);
     const {_id, imageUrl, itemName, shortDescription, subcategoryName, price, rating ,customization, status,processing} = item;
+    const [cm, setCm]= useState(customization);
+    const updateItem = (e) => {
+        e.preventDefault();
+        const imageUrl = e.target.elements.imageUrl.value;
+        const itemName = e.target.elements.itemName.value;
+        const subcategoryName = e.target.elements.subCategory.value;
+        const shortDescription = e.target.elements.shortDescription.value;
+        const price = e.target.elements.price.value;
+        const email = e.target.elements.email.value;
+        const displayName = e.target.elements.displayName.value;
+        const rating = e.target.elements.rating.value;
+        const processing = e.target.elements.processing.value;
+        const status = e.target.elements.status.value;
+        const customization =e.target.elements.radio.value;
 
-    const updateItem = () => {
+        console.log(imageUrl, itemName, subcategoryName, shortDescription, price, email, displayName, rating, customization, processing, status);
 
+        const itemObj = { imageUrl, itemName, subcategoryName, shortDescription, price, email, displayName, rating, customization, processing, status };
+        console.log(itemObj);
+
+        fetch(`http://localhost:5001/items/${item._id}`, {
+            method:'PUT',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(itemObj)
+        })
+        .then(res => res.json())
+        .then(data=>{
+            console.log(data);
+            toast.success("Item updated successfully!");
+        })
+        .catch((error)=>{
+            console.log(error)
+            toast.error("Failed to update!")
+        })
     }
     
     return (
@@ -27,7 +62,7 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Enter Image URL:</span>
 
                         </div>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='imageUrl' value={imageUrl} required />
+                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='imageUrl' defaultValue={imageUrl} required />
 
 
                     </div>
@@ -36,7 +71,7 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Enter Item Name:</span>
 
                         </div>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='itemName' value={itemName} required />
+                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='itemName' defaultValue={itemName} required />
 
                     </div>
 
@@ -45,8 +80,8 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Select Subcategory Name:</span>
 
                         </div>
-                        <select className="select select-primary w-full md:max-w-[80%]" name="subCategory">
-                            <option value='Landscape Painting' selected>Landscape Painting</option>
+                        <select className="select select-primary w-full md:max-w-[80%]" name="subCategory" defaultValue={subcategoryName}>
+                            <option value='Landscape Painting'>Landscape Painting</option>
                             <option value='Portrait Drawing'>Portrait Drawing</option>
                             <option value='Watercolour Painting'>Watercolour Painting</option>
                             <option value='Oil Painting'>Oil Painting</option>
@@ -62,7 +97,7 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Enter Short Description:</span>
 
                         </div>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="shortDescription" value={shortDescription} required />
+                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="shortDescription" defaultValue={shortDescription} required />
 
                     </div>
                     <div className="form-control w-full lg:w-[60%] flex flex-col gap-4">
@@ -70,7 +105,7 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Price:</span>
 
                         </div>
-                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="price" value={price} required />
+                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="price" defaultValue={price} required />
 
                     </div>
                     <div className="form-control w-full lg:w-[60%] flex flex-col gap-4">
@@ -78,7 +113,7 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Rating:</span>
 
                         </div>
-                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="rating" value={rating} required />
+                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="rating" defaultValue={rating} required />
 
                     </div>
                     <div className="form-control w-full lg:w-[60%] flex flex-row items-center gap-4">
@@ -86,8 +121,8 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Customization</span>
 
                         </div>
-                        <input type="radio" name="radio" value='yes' className="radio checked:bg-blue-500" checked/><span>Yes</span>
-                        <input type="radio" name="radio" value='no' className="radio checked:bg-red-500" /> <span>No</span>
+                        <input type="radio" name="radio" value='yes' className="radio checked:bg-blue-500" checked={cm==='yes'} onChange={()=>{setCm('yes')}}/><span>Yes</span>
+                        <input type="radio" name="radio" value='no' className="radio checked:bg-red-500" checked={cm==='no'} onChange={()=>{setCm('no')}}/> <span>No</span>
 
                     </div>
 
@@ -96,7 +131,7 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Processing Time</span>
 
                         </div>
-                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]"  name="processing" value={processing}  required />
+                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]"  name="processing" defaultValue={processing}  required />
 
                     </div>
 
@@ -105,7 +140,7 @@ const UpdateItem = () => {
                             <span className="label-text font-medium text-xl">Stock Status</span>
 
                         </div>
-                        <select className="select select-primary w-full md:max-w-[80%]" name="status">
+                        <select className="select select-primary w-full md:max-w-[80%]" name="status" defaultValue={status}>
                             <option value='In Stock'>In Stock</option>
                             <option value='Made To Order'>Made To Order</option>
                         </select>
@@ -130,7 +165,7 @@ const UpdateItem = () => {
 
                     </div>
 
-                    <button className="btn btn-primary" type="submit">Add Item</button>
+                    <button className="btn btn-primary" type="submit">Update Item</button>
                 </div>
             </form>
         </div>

@@ -22,7 +22,7 @@ const MyListCard = ({ item, onDelete }) => {
         console.log("clicked!!")
     }
     return (
-        <div className="card w-96 lg:w-[400px] bg-base-100 border">
+        <div className="card w-full md:w-96 md:max-w-[90%] lg:w-[400px] bg-base-100 border">
             <figure><img src={imageUrl} alt="Shoes" /></figure>
             <div className="card-body">
                 <h2 className="card-title text-[#030712] text-2xl">
@@ -38,7 +38,7 @@ const MyListCard = ({ item, onDelete }) => {
                 <div className='text-[#03071299] text-lg'>
                     Customization: {customization}
                 </div>
-                <div className="card-actions justify-between">
+                <div className="flex flex-row justify-between">
                    <Link to={`/update-item/${_id}`} ><button className='btn' onClick={updateItem}>Update</button></Link> 
                     <button className='btn' onClick={() => document.getElementById('my_modal_5').showModal()}>Delete</button>
                     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
