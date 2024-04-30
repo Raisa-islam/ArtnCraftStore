@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FaStar } from "react-icons/fa";
 
 const MyListCard = ({ item, onDelete }) => {
     const {_id, imageUrl, itemName, subcategoryName, price, rating ,customization, status} = item;
@@ -21,16 +22,24 @@ const MyListCard = ({ item, onDelete }) => {
         console.log("clicked!!")
     }
     return (
-        <div className="card w-96 bg-base-100 shadow-xl">
-            <figure><img src="https://daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="Shoes" /></figure>
+        <div className="card w-96 lg:w-[400px] bg-base-100 border">
+            <figure><img src={imageUrl} alt="Shoes" /></figure>
             <div className="card-body">
-                <h2 className="card-title">
+                <h2 className="card-title text-[#030712] text-2xl">
                     {itemName}
                     <div className="badge badge-secondary">{status}</div>
                 </h2>
-                <p>{subcategoryName}</p>
+                <p className='text-[#03071299] text-xl font-medium'>{subcategoryName}</p>
+
+                <div className='flex justify-between text-[#03071299] text-lg'>
+                    <p>Price: {price}$</p>
+                    <p className='flex items-center gap-2'>Rating: {rating}<FaStar/></p>
+                </div>
+                <div className='text-[#03071299] text-lg'>
+                    Customization: {customization}
+                </div>
                 <div className="card-actions justify-between">
-                   <Link to='/' ><button className='btn' onClick={updateItem}>Update</button></Link> 
+                   <Link to={`/update-item/${_id}`} ><button className='btn' onClick={updateItem}>Update</button></Link> 
                     <button className='btn' onClick={() => document.getElementById('my_modal_5').showModal()}>Delete</button>
                     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
                         <div className="modal-box">

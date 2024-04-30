@@ -11,7 +11,7 @@ const AlCraftsList = () => {
                 <title>Crafty | Add Item</title>
             </Helmet>
             <p>all crafts list</p>
-            <h2>{items.length}</h2>
+            
             <div className="overflow-x-auto">
                 <table className="table table-zebra">
                     <thead>
@@ -26,8 +26,8 @@ const AlCraftsList = () => {
                     </thead>
                     <tbody>
                         {
-                            items.map((item)=><><tr>
-                                <th>{item._id}</th>
+                            items.map((item, idx)=><><tr>
+                                <th>{++idx}</th>
                                 <th>{item.itemName}</th>
                                 <th>{item.subcategoryName}</th>
                                 <th>{item.status}</th>

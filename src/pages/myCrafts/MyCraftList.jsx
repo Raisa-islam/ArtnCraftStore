@@ -26,11 +26,17 @@ const MyCraftList = () => {
                 <title>ArtFizz | My Arts n Crafts</title>
             </Helmet>
             <p>my craft list</p>
-            <div className="grid grid-cols-1 md:grid-cols-2">
+            <div>
+               
+            </div>
+            <div className="flex justify-center items-center">
+            <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 lg:gap-8">
             {
                 items.map((item)=><MyListCard key={item._id} item={item} onDelete={handleDelete}></MyListCard>)
             }
             </div>
+            </div>
+            
             
            
         </div>

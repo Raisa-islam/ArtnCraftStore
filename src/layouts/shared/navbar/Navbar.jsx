@@ -1,7 +1,8 @@
 import { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProviders';
-import { Tooltip } from 'react-tooltip'
+import logoi from '../../../assets/logoOfArtFizz-removebg-preview.png';
+import Avatar from '../../../components/avatar/Avatar';
 
 const Navbar = () => {
     const { user, logout, flag } = useContext(AuthContext);
@@ -53,7 +54,7 @@ const Navbar = () => {
                         {navLinks}
                     </ul>
                 </div>
-                <img src='' className='w-8 h-7' alt="" />
+                <img src={logoi} className=' w-16 h-16' alt="" />
                 <a className="btn btn-ghost text-[16px] md:text-xl">ArtFizz</a>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -66,7 +67,7 @@ const Navbar = () => {
                     user && (user.photoURL || flag) ?
                         <>
                             <div className="tooltip tooltip-bottom z-50" data-tip={user.displayName}>
-                                {/* <Avatar photoURL={user.photoURL} /> */}
+                                <Avatar photoURL={user.photoURL} />
                             </div>
 
 

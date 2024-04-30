@@ -1,65 +1,24 @@
-import { useContext, useState } from "react";
-import { Helmet } from "react-helmet";
-import { AuthContext } from "../../providers/AuthProviders";
-import { toast } from 'react-toastify';
+import React, { useContext } from 'react';
+import { Helmet } from 'react-helmet';
+import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../providers/AuthProviders';
 
-const AddCraftItem = () => {
-    
-    const { user } = useContext(AuthContext);
+const UpdateItem = () => {
+    const {user} = useContext(AuthContext);
+    const item = useLoaderData();
+    console.log(item);
+    const {_id, imageUrl, itemName, shortDescription, subcategoryName, price, rating ,customization, status,processing} = item;
 
-    const addItem = e => {
-        e.preventDefault();
-        const imageUrl = e.target.elements.imageUrl.value;
-        const itemName = e.target.elements.itemName.value;
-        const subcategoryName = e.target.elements.subCategory.value;
-        const shortDescription = e.target.elements.shortDescription.value;
-        const price = e.target.elements.price.value;
-        const email = e.target.elements.email.value;
-        const displayName = e.target.elements.displayName.value;
-        const rating = e.target.elements.rating.value;
-        const processing = e.target.elements.processing.value;
-        const status = e.target.elements.status.value;
-        const customization =e.target.elements.radio.value;
-
-        console.log(imageUrl, itemName, subcategoryName, shortDescription, price, email, displayName, rating, customization, processing, status);
-
-        const itemObj = { imageUrl, itemName, subcategoryName, shortDescription, price, email, displayName, rating, customization, processing, status };
-        console.log(itemObj);
-
-        // send data to api
-        
-                fetch('http://localhost:5001/items', {
-                    method: 'POST',
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(itemObj)
-                })
-                    .then(res => {
-                        if (!res.ok) {
-                            throw new Error('Network response was not ok ' + res.statusText);
-                        }
-                        return res.json();
-                    })
-                    .then(data => {
-                        console.log(data);
-                        // Clear the form here after successful submission
-                        e.target.reset();
-                        toast.success("Item added successfully!");
-                    })
-                    .catch(error => {
-                        console.error('There has been a problem with your fetch operation:', error);
-                        toast.error("Failed to add the item. Please try again!");
-                    });
-        //Clear the form after submission
+    const updateItem = () => {
 
     }
+    
     return (
         <div className="container mx-auto mt-12 max-w-[80%] overflow-hidden mb-12 p-2">
             <Helmet>
-                <title>ArtFizz | Add Item</title>
+                <title>ArtFizz | Update Item</title>
             </Helmet>
-            <form onSubmit={addItem}>
+            <form onSubmit={updateItem}>
                 <div className="flex flex-col gap-3 items-center justify-center">
 
 
@@ -68,7 +27,7 @@ const AddCraftItem = () => {
                             <span className="label-text font-medium text-xl">Enter Image URL:</span>
 
                         </div>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='imageUrl' required />
+                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='imageUrl' value={imageUrl} required />
 
 
                     </div>
@@ -77,7 +36,7 @@ const AddCraftItem = () => {
                             <span className="label-text font-medium text-xl">Enter Item Name:</span>
 
                         </div>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='itemName' required />
+                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name='itemName' value={itemName} required />
 
                     </div>
 
@@ -103,7 +62,7 @@ const AddCraftItem = () => {
                             <span className="label-text font-medium text-xl">Enter Short Description:</span>
 
                         </div>
-                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="shortDescription" required />
+                        <input type="text" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="shortDescription" value={shortDescription} required />
 
                     </div>
                     <div className="form-control w-full lg:w-[60%] flex flex-col gap-4">
@@ -111,7 +70,7 @@ const AddCraftItem = () => {
                             <span className="label-text font-medium text-xl">Price:</span>
 
                         </div>
-                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="price" required />
+                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="price" value={price} required />
 
                     </div>
                     <div className="form-control w-full lg:w-[60%] flex flex-col gap-4">
@@ -119,7 +78,7 @@ const AddCraftItem = () => {
                             <span className="label-text font-medium text-xl">Rating:</span>
 
                         </div>
-                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="rating" required />
+                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]" name="rating" value={rating} required />
 
                     </div>
                     <div className="form-control w-full lg:w-[60%] flex flex-row items-center gap-4">
@@ -137,7 +96,7 @@ const AddCraftItem = () => {
                             <span className="label-text font-medium text-xl">Processing Time</span>
 
                         </div>
-                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]"  name="processing" required />
+                        <input type="number" placeholder="Type here" className="input input-bordered input-primary w-full md:max-w-[80%]"  name="processing" value={processing}  required />
 
                     </div>
 
@@ -174,11 +133,8 @@ const AddCraftItem = () => {
                     <button className="btn btn-primary" type="submit">Add Item</button>
                 </div>
             </form>
-
-
-
         </div>
     );
 };
 
-export default AddCraftItem;
+export default UpdateItem;
