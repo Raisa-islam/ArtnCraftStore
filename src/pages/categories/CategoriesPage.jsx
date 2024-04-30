@@ -7,7 +7,7 @@ const CategoriesPage = () => {
     const [items, setItems] = useState([])
     useEffect(()=>{
         
-        fetch(`http://localhost:5001/category/${val}`)
+        fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/category/${val}`)
         .then((res) => res.json())
         .then((data) => setItems(data));
         

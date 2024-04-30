@@ -8,7 +8,7 @@ const MyListCard = ({ item, onDelete }) => {
    
     const deleteItem = () => {
         onDelete(_id);
-        fetch(`http://localhost:5001/items/${_id}`,{
+        fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/items/${_id}`,{
             method: 'DELETE'
         })
         .then(res => res.json())

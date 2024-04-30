@@ -28,7 +28,7 @@ const AddCraftItem = () => {
 
         // send data to api
         
-                fetch('http://localhost:5001/items', {
+                fetch('https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/items', {
                     method: 'POST',
                     headers: {
                         'content-type': 'application/json'

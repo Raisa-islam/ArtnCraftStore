@@ -30,7 +30,7 @@ const UpdateItem = () => {
         const itemObj = { imageUrl, itemName, subcategoryName, shortDescription, price, email, displayName, rating, customization, processing, status };
         console.log(itemObj);
 
-        fetch(`http://localhost:5001/items/${item._id}`, {
+        fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/items/${item._id}`, {
             method:'PUT',
             headers:{
                 'content-type':'application/json'

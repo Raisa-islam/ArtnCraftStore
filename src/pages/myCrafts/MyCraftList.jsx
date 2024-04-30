@@ -14,7 +14,7 @@ const MyCraftList = () => {
 
     // useEffect(()=>{
         
-    //     fetch(`http://localhost:5001/mylist/${user.email}`)
+    //     fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/mylist/${user.email}`)
     //     .then((res) => res.json())
     //     .then((data) => setItems(data));
     //    // console.log(items);
@@ -24,7 +24,7 @@ const MyCraftList = () => {
     // },[items])
 
     useEffect(()=>{
-        fetch(`http://localhost:5001/customization/${val}/${user.email}`)
+        fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/customization/${val}/${user.email}`)
         .then(res => res.json())
         .then(data => setItems(data))
         .catch(error => console.error("Error:", error));

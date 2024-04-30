@@ -21,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        loader: ()=> fetch('http://localhost:5001/items')
+        loader: ()=> fetch('https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/items')
 
       },
       {
@@ -42,12 +42,12 @@ const router = createBrowserRouter([
       {
         path:"/all-arts-and-crafts",
         element:<AlCraftsList></AlCraftsList>,
-        loader: ()=> fetch('http://localhost:5001/items')
+        loader: ()=> fetch('https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/items')
       },
       {
         path:"/view-details/:id",
         element:<PrivateRoutes><ViewDetails></ViewDetails></PrivateRoutes>,
-        loader: ({params}) => fetch(`http://localhost:5001/items/${params.id}`)
+        loader: ({params}) => fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/items/${params.id}`)
       },
       {
         path:"/my-art-and-craft-list",
@@ -57,7 +57,7 @@ const router = createBrowserRouter([
       {
         path:"/update-item/:id",
         element:<PrivateRoutes><UpdateItem></UpdateItem></PrivateRoutes>,
-        loader: ({params}) => fetch(`http://localhost:5001/items/${params.id}`)
+        loader: ({params}) => fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/items/${params.id}`)
       },
       {
         path:"/category/:cat",

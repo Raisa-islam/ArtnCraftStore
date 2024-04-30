@@ -22,7 +22,7 @@ const Home = () => {
 
     useEffect(()=>{
         
-        fetch(`http://localhost:5001/category`)
+        fetch(`https://b9-a10-server-zy66oz158-raisa-islams-projects.vercel.app/category`)
         .then((res) => res.json())
         .then((data) => setCategories(data));
         console.log("here",categories);
