@@ -68,10 +68,10 @@ const Navbar = () => {
                 {
                     user && (user.photoURL || flag) ?
                         <>
-                            <a data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName}>
+                            <a data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName} className=' z-20'>
                                 <Avatar photoURL={user.photoURL} />
                             </a>
-                            <Tooltip id="my-tooltip" />
+                            <Tooltip id="my-tooltip" className=' z-20'/>
 
 
                             <button onClick={handleSignOut} className="hidden md:flex bg-gradient-to-r from-green-400 to-blue-500 border border-gray-300 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600 transition duration-300 font-bold ">

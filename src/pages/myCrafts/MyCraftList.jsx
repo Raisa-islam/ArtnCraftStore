@@ -13,7 +13,7 @@ const MyCraftList = () => {
         fetch(`http://localhost:5001/mylist/${user.email}`)
         .then((res) => res.json())
         .then((data) => setItems(data));
-        console.log(items);
+       // console.log(items);
         setFilter(items)
     },[items])
 
@@ -28,6 +28,36 @@ const MyCraftList = () => {
 
     const handleDone = () => {
         console.log(`Done after 5 loops!`)
+    }
+
+    const clearFilter=()=>{
+        setFilter(items);
+    }
+
+    function filterByCustomization(array) {
+        const filteredArray = [];
+      
+        for (let i = 0; i < array.length; i++) {
+          const item = array[i]; 
+          
+          const {customization} = item;
+          console.log(customization)
+          if (customization === 'yes') { 
+            filteredArray.push(item);
+          }
+        }
+        console.log(filteredArray)
+      
+        setFilter(filteredArray)// Return the filtered array
+      }
+
+    const applyFilter=(e)=>{
+        e.preventDefault();
+        //const val = e.target.elements.filterselector.value;
+        //console.log(val);
+        filterByCustomization(items)
+        console.log('filterd list',filter)
+
     }
     return (
         <div className="container mx-auto mt-12 max-w-[80%] overflow-hidden mb-12 p-2">
@@ -59,10 +89,22 @@ const MyCraftList = () => {
                 <p className="text-center">An Ever-Growing Collection of Artistic Creations to Fuel Your Passion</p>
             </div>
 
+            <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-center mb-6">
+                <select className="select select-bordered w-full max-w-xs" name="filterselector">
+                    <option value='yes'>Yes</option>
+                    <option value='no'>No</option>
+                </select>
+                <div className="flex flex-row gap-4">
+                <button className="btn btn-primary" onClick={applyFilter}>Apply </button>
+                <button className="btn btn-primary" onClick={clearFilter}>Clear </button>
+                </div>
+                
+            </div>
+
             <div className="flex justify-center items-center">
             <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 lg:gap-8">
             {
-                items.map((item)=><MyListCard key={item._id} item={item} onDelete={handleDelete}></MyListCard>)
+                filter.map((item)=><MyListCard key={item._id} item={item} onDelete={handleDelete}></MyListCard>)
             }
             </div>
             </div>

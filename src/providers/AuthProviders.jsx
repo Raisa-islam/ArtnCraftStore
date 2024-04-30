@@ -71,7 +71,7 @@ const AuthProviders = ({ children }) => {
             .then(result => {
                 const loggedUser = result.user
                 
-                console.log(loggedUser);
+                //console.log(loggedUser);
                 setUser(loggedUser);
             })
             .catch(error => {

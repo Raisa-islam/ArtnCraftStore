@@ -10,6 +10,7 @@ import AlCraftsList from '../pages/allCraftsList/AlCraftsList';
 import MyCraftList from '../pages/myCrafts/MyCraftList';
 import ViewDetails from '../layouts/details/ViewDetails';
 import UpdateItem from '../pages/updateItem/UpdateItem';
+import CategoriesPage from '../pages/categories/CategoriesPage';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Home></Home>,
-        //loader: () => fetch('/estates.json')
+        loader: ()=> fetch('http://localhost:5001/items')
 
       },
       {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
         path:"/update-item/:id",
         element:<PrivateRoutes><UpdateItem></UpdateItem></PrivateRoutes>,
         loader: ({params}) => fetch(`http://localhost:5001/items/${params.id}`)
+      },
+      {
+        path:"/category/:cat",
+        element:<PrivateRoutes><CategoriesPage></CategoriesPage></PrivateRoutes>
       }
 
     ]
