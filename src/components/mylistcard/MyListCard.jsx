@@ -23,12 +23,12 @@ const MyListCard = ({ item, onDelete }) => {
     }
     return (
         <div className="card w-full md:w-96 md:max-w-[90%] lg:w-[400px] bg-base-100 border">
-            <figure><img src={imageUrl} alt="Shoes" /></figure>
+            <figure><img src={imageUrl} alt="Shoes" className='w-full' /></figure>
             <div className="card-body">
                 
-                <h2 className="card-title text-[#030712] text-2xl flex flex-col lg:flex-row">
+                <h2 className="card-title text-[#030712] text-2xl flex flex-col">
                     {itemName}
-                    <div className="badge badge-secondary">{status}</div>
+                    <div className="badge badge-secondary w-fit p-2">{status}</div>
                 </h2>
                 <p className='text-[#03071299] text-xl font-medium'>{subcategoryName}</p>
 
