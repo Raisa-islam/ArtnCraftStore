@@ -51,7 +51,7 @@ const Home = () => {
       }
 
       const uniqueData = uniqueObjects(items, "email");
-      console.log("all the artists ", uniqueData)
+      //console.log("all the artists ", uniqueData)
     const randomArray = (maxE) => {
         const shuffled = items.slice();
         shuffled.sort(() => Math.random() - 0.5);
@@ -136,9 +136,9 @@ const Home = () => {
                         {ratingFiveObjects.map((item) => <PopularCraft key={item._id} item={item}></PopularCraft>)}
                     </div>
                 </div>
-            </div>
+            </div> 
 
-            <div className="container mx-auto mt-12 max-w-[80%] overflow-hidden mb-12 p-2">
+             <div className="container mx-auto mt-12 max-w-[80%] overflow-hidden mb-12 p-2">
                 <div className='text-center text-2xl font-bold'>
                     Popular Artists
                 </div>
@@ -148,7 +148,7 @@ const Home = () => {
                         {uniqueData.map((item) => <PopularArtists key={item._id} item={item}></PopularArtists>)}
                     </div>
                 </div>
-            </div>
+            </div> */
         </div>
     );
 };

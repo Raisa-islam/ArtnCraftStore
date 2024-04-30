@@ -8,19 +8,29 @@ const MyCraftList = () => {
     const [items, setItems] = useState([]);
     const [filter, setFilter] = useState([]);
     const {user} = useContext(AuthContext);
-    const [customDataYes, setCustomDataYes] = useState([]);
+    
    
-    const [val, setVal] = useState([])
-    useEffect(()=>{
+    const [val, setVal] = useState('All')
+
+    // useEffect(()=>{
         
-        fetch(`http://localhost:5001/mylist/${user.email}`)
-        .then((res) => res.json())
-        .then((data) => setItems(data));
-       // console.log(items);
-        setFilter(items)
+    //     fetch(`http://localhost:5001/mylist/${user.email}`)
+    //     .then((res) => res.json())
+    //     .then((data) => setItems(data));
+    //    // console.log(items);
+    //     setFilter(items)
 
 
-    },[items])
+    // },[items])
+
+    useEffect(()=>{
+        fetch(`http://localhost:5001/customization/${val}/${user.email}`)
+        .then(res => res.json())
+        .then(data => setItems(data))
+        .catch(error => console.error("Error:", error));
+        
+        
+    },[val])
 
     const handleDelete = (id)=>{
         console.log(id)
@@ -35,25 +45,25 @@ const MyCraftList = () => {
         console.log(`Done after 5 loops!`)
     }
 
-    const clearFilter=()=>{
-        setFilter(items);
-    }
+   
 
-    const fetchData = async() => {
-        fetch(`http://localhost:5001/customization/yes/${user.email}`)
-        .then(res => res.json())
-        .then(data => setCustomDataYes(data))
-        .catch(error => console.error("Error:", error));
-        console.log(customDataYes)
-        setFilter(customDataYes)
-      };
+    
 
     const applyFilter=(e)=>{
         e.preventDefault();
-        //const val = e.target.elements.filterselector.value;
-        //console.log(val);
-        //setVal('yes')
-        fetchData();
+        const val = e.target.elements.filterselector.value;
+        console.log(val);
+        if(val==='yes'){
+            setVal('yes')
+        }
+        else if(val==='no'){
+            setVal('no')
+        }
+        else{
+            setVal('All')
+        }
+
+        
        
 
     }
@@ -87,22 +97,22 @@ const MyCraftList = () => {
                 <p className="text-center">An Ever-Growing Collection of Artistic Creations to Fuel Your Passion</p>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-center items-center gap-4 text-center mb-6">
+            <form onSubmit={applyFilter} className="flex flex-col md:flex-row justify-center items-center gap-4 text-center mb-6">
                 <select className="select select-bordered w-full max-w-xs" name="filterselector">
+                    <option value='All'>All</option>
                     <option value='yes'>Yes</option>
                     <option value='no'>No</option>
                 </select>
                 <div className="flex flex-row gap-4">
-                <button className="btn btn-primary" onClick={applyFilter}>Apply </button>
-                <button className="btn btn-primary" onClick={clearFilter}>Clear </button>
+                <button className="btn btn-primary"  type="submit">Apply </button>
                 </div>
                 
-            </div>
+            </form>
 
             <div className="flex justify-center items-center">
             <div className="grid grid-cols-1 md:grid-cols-2 justify-between gap-4 lg:gap-8">
             {
-                filter.map((item)=><MyListCard key={item._id} item={item} onDelete={handleDelete}></MyListCard>)
+                items.map((item)=><MyListCard key={item._id} item={item} onDelete={handleDelete}></MyListCard>)
             }
             </div>
             </div>
