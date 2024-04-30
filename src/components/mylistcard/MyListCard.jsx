@@ -25,7 +25,8 @@ const MyListCard = ({ item, onDelete }) => {
         <div className="card w-full md:w-96 md:max-w-[90%] lg:w-[400px] bg-base-100 border">
             <figure><img src={imageUrl} alt="Shoes" /></figure>
             <div className="card-body">
-                <h2 className="card-title text-[#030712] text-2xl">
+                
+                <h2 className="card-title text-[#030712] text-2xl flex flex-col lg:flex-row">
                     {itemName}
                     <div className="badge badge-secondary">{status}</div>
                 </h2>
@@ -33,7 +34,7 @@ const MyListCard = ({ item, onDelete }) => {
 
                 <div className='flex justify-between text-[#03071299] text-lg'>
                     <p>Price: {price}$</p>
-                    <p className='flex items-center gap-2'>Rating: {rating}<FaStar/></p>
+                    <p className='flex flex-row justify-center items-center gap-2'>Rating: {rating}<FaStar/></p>
                 </div>
                 <div className='text-[#03071299] text-lg'>
                     Customization: {customization}

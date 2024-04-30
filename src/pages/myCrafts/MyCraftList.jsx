@@ -8,6 +8,9 @@ const MyCraftList = () => {
     const [items, setItems] = useState([]);
     const [filter, setFilter] = useState([]);
     const {user} = useContext(AuthContext);
+    const [customDataYes, setCustomDataYes] = useState([]);
+   
+    const [val, setVal] = useState([])
     useEffect(()=>{
         
         fetch(`http://localhost:5001/mylist/${user.email}`)
@@ -15,6 +18,8 @@ const MyCraftList = () => {
         .then((data) => setItems(data));
        // console.log(items);
         setFilter(items)
+
+
     },[items])
 
     const handleDelete = (id)=>{
@@ -34,29 +39,22 @@ const MyCraftList = () => {
         setFilter(items);
     }
 
-    function filterByCustomization(array) {
-        const filteredArray = [];
-      
-        for (let i = 0; i < array.length; i++) {
-          const item = array[i]; 
-          
-          const {customization} = item;
-          console.log(customization)
-          if (customization === 'yes') { 
-            filteredArray.push(item);
-          }
-        }
-        console.log(filteredArray)
-      
-        setFilter(filteredArray)// Return the filtered array
-      }
+    const fetchData = async() => {
+        fetch(`http://localhost:5001/customization/yes/${user.email}`)
+        .then(res => res.json())
+        .then(data => setCustomDataYes(data))
+        .catch(error => console.error("Error:", error));
+        console.log(customDataYes)
+        setFilter(customDataYes)
+      };
 
     const applyFilter=(e)=>{
         e.preventDefault();
         //const val = e.target.elements.filterselector.value;
         //console.log(val);
-        filterByCustomization(items)
-        console.log('filterd list',filter)
+        //setVal('yes')
+        fetchData();
+       
 
     }
     return (
