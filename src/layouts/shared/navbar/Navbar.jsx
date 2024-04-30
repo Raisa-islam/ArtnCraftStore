@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../providers/AuthProviders';
 import logoi from '../../../assets/logoOfArtFizz-removebg-preview.png';
 import Avatar from '../../../components/avatar/Avatar';
+import { Tooltip } from 'react-tooltip'
 
 const Navbar = () => {
     const { user, logout, flag } = useContext(AuthContext);
@@ -67,9 +68,10 @@ const Navbar = () => {
                 {
                     user && (user.photoURL || flag) ?
                         <>
-                            <div className="tooltip tooltip-bottom z-50" data-tip={user.displayName}>
+                            <a data-tooltip-id="my-tooltip" data-tooltip-content={user.displayName}>
                                 <Avatar photoURL={user.photoURL} />
-                            </div>
+                            </a>
+                            <Tooltip id="my-tooltip" />
 
 
                             <button onClick={handleSignOut} className="hidden md:flex bg-gradient-to-r from-green-400 to-blue-500 border border-gray-300 text-white px-6 py-3 rounded-lg shadow-md hover:bg-gradient-to-r hover:from-green-500 hover:to-blue-600 transition duration-300 font-bold ">
