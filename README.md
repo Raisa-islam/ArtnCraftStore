@@ -10,6 +10,7 @@ Currently, two official plugins are available:
 APP Name: Art Fizz
 
 This app is made for artists and art enthusiasist, to give them a platfor to showcase their work
+
 features
 - proper authentication using email, password and google , github
 - add and update items
