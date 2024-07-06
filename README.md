@@ -8,6 +8,8 @@ Currently, two official plugins are available:
 - [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
 APP Name: Art Fizz
+
+This app is made for artists and art enthusiasist, to give them a platfor to showcase their work
 features
 - proper authentication using email, password and google , github
 - add and update items
