@@ -18,6 +18,10 @@ features
 - can see others creations
 - can see popular creation and artists info
 
+Technology used-
+- React
+- firebase
+
 Live site URL (https://artncraftstore-7c050.web.app/)
 Category: Painting and drawing
 
