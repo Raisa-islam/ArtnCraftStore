@@ -17,3 +17,7 @@ features
 
 Live site URL (https://artncraftstore-7c050.web.app/)
 Category: Painting and drawing
+
+To Run it-
+1. clone the repo
+2. npm install
